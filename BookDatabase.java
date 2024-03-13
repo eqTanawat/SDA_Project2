@@ -110,5 +110,9 @@ public class BookDatabase {
         System.out.println("Error: Book not found.");
     }
 
+    public List<Book> getAllBooks() {
+        return books;
+    }
+
 }
 
