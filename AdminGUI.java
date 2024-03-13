@@ -7,7 +7,6 @@ import java.io.*;
 public class AdminGUI extends BaseGUI {
     public AdminGUI(User user) {
         super(user, "Admin Dashboard");
-        createGUI(); // Call the template method
     }
 
     @Override
