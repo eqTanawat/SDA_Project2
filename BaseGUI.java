@@ -17,18 +17,17 @@ public abstract class BaseGUI extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        JLabel greetingLabel = new JLabel("Welcome, " + user.getUsername() + "! " + getRoleDescription());
-        greetingLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(greetingLabel, BorderLayout.CENTER);
-
+        JPanel topPanel = new JPanel(new BorderLayout());
         JButton logoutButton = new JButton("Logout");
+        logoutButton.setPreferredSize(new Dimension(100, 30)); // Set preferred size
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 logout();
             }
         });
-        panel.add(logoutButton, BorderLayout.SOUTH);
+        topPanel.add(logoutButton, BorderLayout.EAST); // Logout button aligned to the right
+        panel.add(topPanel, BorderLayout.NORTH);
 
         add(panel);
         setVisible(true);

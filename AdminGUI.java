@@ -68,6 +68,16 @@ public class AdminGUI extends BaseGUI {
 
     @Override
     protected String getRoleDescription() {
+        // Return the role description as a string
         return "You are logged in as an Admin.";
+    }
+
+    // Display the role description as a popup when AdminGUI is created
+    @Override
+    protected void createGUI() {
+        // Role-specific behavior provided by subclasses
+        JOptionPane.showMessageDialog(null, getRoleDescription());
+        createRoleSpecificGUI();
+
     }
 }
