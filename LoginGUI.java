@@ -62,12 +62,24 @@ public class LoginGUI extends JFrame {
         // Validate user credentials
         UserDatabase database = UserDatabase.getInstance();
         if (database.validateUser(username, password)) {
-            // Close the LoginGUI window
-            dispose();
-            // Create a new User instance
             User user = database.getUserByUsername(username);
-            // Open the LibraryGUI window with the logged-in user
-            openBookStoreGUI(user);
+            if (user != null) {
+                GUIFactory factory;
+                if ("Admin".equals(user.getRole())) {
+                    factory = new AdminGUIFactory();
+                } else {
+                    factory = new CustomerGUIFactory();
+                }
+
+                // Create GUI instance using the factory
+                JFrame gui = factory.createGUI(user);
+                gui.setVisible(true);
+
+                // Close the LoginGUI window
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "User not found!");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Invalid Username or Password!");
         }

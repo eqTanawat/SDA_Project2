@@ -1,27 +1,18 @@
-// AdminGUI class
-import javax.swing.*;
-import java.awt.*;
-
-// GUI Admin page
-public class AdminGUI extends JFrame {
-    private User user;
-
+// AdminGUI class extending BaseGUI
+public class AdminGUI extends BaseGUI {
     public AdminGUI(User user) {
-        this.user = user;
+        super(user, "Admin Dashboard");
+        createGUI(); // Call the template method
+    }
 
-        setTitle("Admin Dashboard");
-        setSize(400, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+    @Override
+    protected void createRoleSpecificGUI() {
+        // Specific behavior for Admin GUI
+        // You can add components or customize the layout here
+    }
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        JLabel greetingLabel = new JLabel("Welcome, " + user.getUsername() + "! You are logged in as an Admin.");
-        greetingLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(greetingLabel, BorderLayout.CENTER);
-
-        add(panel);
-        setVisible(true);
+    @Override
+    protected String getRoleDescription() {
+        return "You are logged in as an Admin.";
     }
 }

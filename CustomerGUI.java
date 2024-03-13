@@ -1,27 +1,18 @@
-// CustomerGUI class
-import javax.swing.*;
-import java.awt.*;
-
-// GUI Customer page
-public class CustomerGUI extends JFrame {
-    private User user;
-
+// CustomerGUI class extending BaseGUI
+public class CustomerGUI extends BaseGUI {
     public CustomerGUI(User user) {
-        this.user = user;
+        super(user, "Customer Dashboard");
+        createGUI(); // Call the template method
+    }
 
-        setTitle("Customer Dashboard");
-        setSize(400, 300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+    @Override
+    protected void createRoleSpecificGUI() {
+        // Specific behavior for Customer GUI
+        // You can add components or customize the layout here
+    }
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        JLabel greetingLabel = new JLabel("Welcome, " + user.getUsername() + "! You are logged in as a Customer.");
-        greetingLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        panel.add(greetingLabel, BorderLayout.CENTER);
-
-        add(panel);
-        setVisible(true);
+    @Override
+    protected String getRoleDescription() {
+        return "You are logged in as a Customer.";
     }
 }
