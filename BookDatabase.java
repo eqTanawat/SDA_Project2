@@ -53,6 +53,15 @@ public class BookDatabase {
     }
 
     public void appendNewBook(Book book) {
+        // Check if the book already exists in the database
+        for (Book existingBook : books) {
+            if (existingBook.getTitle().equals(book.getTitle())) {
+                System.out.println("Error: Book with the same title already exists.");
+                return; // Exit the method without adding the book
+            }
+        }
+    
+        // If the book does not exist, add it to the database and save to CSV
         books.add(book);
         saveBooksToCSV();
     }
@@ -76,9 +85,11 @@ public class BookDatabase {
         for (Book book : books) {
             if (book.getTitle().equals(title)) {
                 int newQuantity = book.getQuantity() - quantityToSubtract;
-                if (newQuantity >= 0) {
+                if (newQuantity > 0) {
                     book.setQuantity(newQuantity);
                     saveBooksToCSV();
+                } else if (newQuantity == 0) {
+                    deleteBook(book.getTitle());
                 } else {
                     System.out.println("Error: Cannot subtract quantity. Quantity would become negative.");
                 }
@@ -87,4 +98,17 @@ public class BookDatabase {
         }
         System.out.println("Error: Book not found.");
     }
+
+    public void changeBookPrice(String title, int newPrice) {
+        for (Book book : books) {
+            if (book.getTitle().equals(title)) {
+                book.setPrice(newPrice);
+                saveBooksToCSV();
+                return;
+            }
+        }
+        System.out.println("Error: Book not found.");
+    }
+
 }
+

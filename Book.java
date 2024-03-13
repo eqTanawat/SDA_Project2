@@ -17,6 +17,7 @@ public class Book {
         this.title = title;
         this.author = author;
         this.quantity = quantity;
+        this.price = price;
     }
 
     // Getters and setters for book attributes

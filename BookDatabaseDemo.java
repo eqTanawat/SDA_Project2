@@ -33,11 +33,15 @@ public class BookDatabaseDemo {
         displayBooks(bookDatabase.getBooks());
 
         // Example: Subtract book quantity
-        bookDatabase.subtractBookQuantity("Book 3", 7);
+        bookDatabase.subtractBookQuantity("Book 3", 0);
 
         // Display the updated book list
         System.out.println("\nBook list after subtracting book quantity:");
         displayBooks(bookDatabase.getBooks());
+
+        System.out.println("\nBook list after changing book price:");
+        bookDatabase.changeBookPrice("Book 1", 40);
+
     }
 
     // Helper method to display a list of books
