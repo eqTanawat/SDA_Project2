@@ -20,6 +20,7 @@ public class AdminGUI extends BaseGUI {
         JButton deleteBookButton = new JButton("Delete Book");
         JButton addBookQuantityButton = new JButton("Add Book Quantity");
         JButton subtractBookQuantityButton = new JButton("Subtract Book Quantity");
+        JButton changePriceButton = new JButton("Change Price");
 
         appendNewBookButton.addActionListener(new ActionListener() {
             @Override
@@ -57,10 +58,20 @@ public class AdminGUI extends BaseGUI {
             }
         });
 
+        changePriceButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle action for changing book price
+                // Example: Open a dialog for changing book price
+                JOptionPane.showMessageDialog(null, "Change Price button clicked");
+            }
+        });
+
         buttonPanel.add(appendNewBookButton);
         buttonPanel.add(deleteBookButton);
         buttonPanel.add(addBookQuantityButton);
         buttonPanel.add(subtractBookQuantityButton);
+        buttonPanel.add(changePriceButton);
 
         getContentPane().add(buttonPanel, BorderLayout.CENTER);
     }
