@@ -2,3 +2,4 @@ username,password,role
 Boook,1234,Admin
 eq,eq,Customer
 e,e,Admin
+c1,e,Customer

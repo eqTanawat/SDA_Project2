@@ -34,7 +34,8 @@ public abstract class BaseGUI extends JFrame {
     // Create the menu bar with logout menu item
     private void createMenu() {
         JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu("Quit");
+    
         JMenuItem logoutMenuItem = new JMenuItem("Logout");
         logoutMenuItem.addActionListener(new ActionListener() {
             @Override
@@ -43,9 +44,24 @@ public abstract class BaseGUI extends JFrame {
             }
         });
         fileMenu.add(logoutMenuItem);
+    
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+        exitMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exit();
+            }
+        });
+        fileMenu.add(exitMenuItem);
+    
         menuBar.add(fileMenu);
         setJMenuBar(menuBar);
     }
+    
+    private void exit() {
+        System.exit(0); // Exit the application
+    }
+    
 
     private void logout() {
         dispose(); // Close the current window
