@@ -85,14 +85,6 @@ public class LoginGUI extends JFrame {
         }
     }
 
-    private void openBookStoreGUI(User user) {
-            if (user.getRole().equals("Admin")) {
-                new AdminGUI(user);
-            } else if (user.getRole().equals("Customer")) {
-                new CustomerGUI(user);
-            }
-    }
-
     private void showRegisterDialog() {
         // Create a dialog to get the registration details
         JFrame registerFrame = new JFrame("Register");
@@ -144,13 +136,4 @@ public class LoginGUI extends JFrame {
         registerFrame.setVisible(true);
     }
     
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LoginGUI();
-            }
-        });
-    }
 }
