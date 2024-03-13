@@ -1,12 +1,18 @@
-class User implements LibraryObserver {
-    private String name;
+// User class
+public class User {
+    private String username;
+    private UserRole role;
 
-    public User(String name) {
-        this.name = name;
+    public User(String username, UserRole role) {
+        this.username = username;
+        this.role = role;
     }
 
-    @Override
-    public void update(LibraryItem item) {
-        System.out.println(name + ": New item added - " + item.getTitle());
+    public String getUsername() {
+        return username;
+    }
+
+    public UserRole getRole() {
+        return role;
     }
 }

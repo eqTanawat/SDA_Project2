@@ -1,3 +1,0 @@
-interface LibraryItem {
-    String getTitle();
-}

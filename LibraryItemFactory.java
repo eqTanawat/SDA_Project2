@@ -1,3 +1,0 @@
-interface LibraryItemFactory {
-    LibraryItem createItem();
-}
