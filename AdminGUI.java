@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+
 
 // AdminGUI class extending BaseGUI
 public class AdminGUI extends BaseGUI {
@@ -26,11 +28,43 @@ protected void createRoleSpecificGUI() {
     appendNewBookButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Handle action for appending a new book
-            // Example: Open a dialog for adding a new book
-            JOptionPane.showMessageDialog(null, "Append New Book button clicked");
+            // Open a dialog to get input for the new book
+            String title = JOptionPane.showInputDialog("Enter book title:");
+            if (title == null || title.isEmpty()) {
+                // If the user cancels or inputs an empty title, return without further action
+                return;
+            }
+    
+            // Check if the book already exists in the database
+            List<Book> existingBooks = BookDatabase.getInstance().getBooks();
+            for (Book existingBook : existingBooks) {
+                if (existingBook.getTitle().equals(title)) {
+                    // If the book already exists, show a message and exit
+                    JOptionPane.showMessageDialog(null, "Error: Book with the same title already exists.");
+                    return;
+                }
+            }
+    
+            // Continue with obtaining other book details
+            String author = JOptionPane.showInputDialog("Enter book author:");
+            int quantity = Integer.parseInt(JOptionPane.showInputDialog("Enter quantity:"));
+            int price = Integer.parseInt(JOptionPane.showInputDialog("Enter price:"));
+    
+            // Create a new book object
+            Book newBook = new Book(title, author, quantity, price);
+    
+            // Append the new book to the database
+            BookDatabase.getInstance().appendNewBook(newBook);
+        
+            String bookDetails = "New Book Details:\n"
+                + "Title: " + newBook.getTitle() + "\n"
+                + "Author: " + newBook.getAuthor() + "\n"
+                + "Quantity: " + newBook.getQuantity() + "\n"
+                + "Price: " + newBook.getPrice();
+            JOptionPane.showMessageDialog(null, bookDetails, "New Book Added", JOptionPane.INFORMATION_MESSAGE);
         }
     });
+    
 
     deleteBookButton.addActionListener(new ActionListener() {
         @Override

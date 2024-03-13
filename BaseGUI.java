@@ -57,12 +57,12 @@ public abstract class BaseGUI extends JFrame {
         setJMenuBar(menuBar);
     }
     
-    private void exit() {
+    final private void exit() {
         System.exit(0); // Exit the application
     }
     
 
-    private void logout() {
+    final private void logout() {
         dispose(); // Close the current window
         new LoginGUI(); // Open the LoginGUI window
     }
