@@ -2,7 +2,6 @@
 public class Book {
     private String title;
     private String author;
-    private String isbn;
     private int quantity;
     private int price;
 
@@ -14,10 +13,9 @@ public class Book {
         return price;
     }
 
-    public Book(String title, String author, String isbn, int quantity, int price) {
+    public Book(String title, String author, int quantity, int price) {
         this.title = title;
         this.author = author;
-        this.isbn = isbn;
         this.quantity = quantity;
     }
 
@@ -38,14 +36,6 @@ public class Book {
         this.author = author;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -59,8 +49,12 @@ public class Book {
         return "Book{" +
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", quantity=" + quantity +
+                ", quantity=" + quantity + '\'' + 
+                ", price=" + price  +
                 '}';
+    }
+
+    public String toCSV() {
+        return String.format("%s,%s,%d,%d", title, author, quantity, price);
     }
 }
