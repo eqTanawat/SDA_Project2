@@ -1,9 +1,9 @@
 // User class
 public class User {
     private String username;
-    private UserRole role;
+    private String role;
 
-    public User(String username, UserRole role) {
+    public User(String username, String role) {
         this.username = username;
         this.role = role;
     }
@@ -12,7 +12,7 @@ public class User {
         return username;
     }
 
-    public UserRole getRole() {
+    public String getRole() {
         return role;
     }
 }

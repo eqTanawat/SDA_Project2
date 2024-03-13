@@ -55,8 +55,8 @@ public class UserDatabase {
         return false;
     }
 
-    // Method to register a new user
-    public boolean registerUser(String username, String password) {
+    // Method to register a new user with role
+    public boolean registerUser(String username, String password, String role) {
         // Check if username already exists
         for (String[] user : userData) {
             if (user[0].equals(username)) {
@@ -66,13 +66,13 @@ public class UserDatabase {
         try {
             // Append new user data to the CSV file
             BufferedWriter writer = new BufferedWriter(new FileWriter("users.csv", true));
-            writer.write(username + "," + password);
+            writer.write(username + "," + password + "," + role);
             writer.newLine();
             writer.close();
             // Update userData array
-            String[][] newData = new String[userData.length + 1][2];
+            String[][] newData = new String[userData.length + 1][3];
             System.arraycopy(userData, 0, newData, 0, userData.length);
-            newData[userData.length] = new String[]{username, password};
+            newData[userData.length] = new String[]{username, password, role};
             userData = newData;
             return true;
         } catch (IOException e) {
@@ -80,4 +80,15 @@ public class UserDatabase {
             return false;
         }
     }
+
+    public User getUserByUsername(String username) {
+        for (String[] user : userData) {
+            if (user[0].equals(username)) {
+                return new User(user[0], user[2]); // Return User object with username and role
+            }
+        }
+        return null; // Return null if user not found
+    }
+
 }
+    
