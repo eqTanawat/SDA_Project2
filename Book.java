@@ -4,8 +4,17 @@ public class Book {
     private String author;
     private String isbn;
     private int quantity;
+    private int price;
 
-    public Book(String title, String author, String isbn, int quantity) {
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public Book(String title, String author, String isbn, int quantity, int price) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;

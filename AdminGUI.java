@@ -2,78 +2,72 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+// AdminGUI class extending BaseGUI
 public class AdminGUI extends BaseGUI {
-    private DefaultListModel<String> userListModel;
-    private JList<String> userList;
-
     public AdminGUI(User user) {
-        super(user, "Admin Dashboard 1");
+        super(user, "Admin Dashboard");
+        createGUI(); // Call the template method
     }
 
     @Override
     protected void createRoleSpecificGUI() {
-        // Create user list
-        userListModel = new DefaultListModel<>();
-        userList = new JList<>(userListModel);
-        JScrollPane scrollPane = new JScrollPane(userList);
+        // Specific behavior for Admin GUI
+        // You can add components or customize the layout here
 
-        // Load user data into the list
-        loadUserList();
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(4, 1));
 
-        // Create delete button
-        JButton deleteButton = new JButton("Delete User");
-        deleteButton.addActionListener(new ActionListener() {
+        JButton appendNewBookButton = new JButton("Append New Book");
+        JButton deleteBookButton = new JButton("Delete Book");
+        JButton addBookQuantityButton = new JButton("Add Book Quantity");
+        JButton subtractBookQuantityButton = new JButton("Subtract Book Quantity");
+
+        appendNewBookButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deleteUser();
+                // Handle action for appending a new book
+                // Example: Open a dialog for adding a new book
+                JOptionPane.showMessageDialog(null, "Append New Book button clicked");
             }
         });
 
-        // Add components to the panel
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(scrollPane, BorderLayout.CENTER);
-        panel.add(deleteButton, BorderLayout.SOUTH);
+        deleteBookButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle action for deleting a book
+                // Example: Open a dialog for deleting a book
+                JOptionPane.showMessageDialog(null, "Delete Book button clicked");
+            }
+        });
 
-        // Add panel to the frame
-        add(panel);
+        addBookQuantityButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle action for adding book quantity
+                // Example: Open a dialog for adding book quantity
+                JOptionPane.showMessageDialog(null, "Add Book Quantity button clicked");
+            }
+        });
+
+        subtractBookQuantityButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Handle action for subtracting book quantity
+                // Example: Open a dialog for subtracting book quantity
+                JOptionPane.showMessageDialog(null, "Subtract Book Quantity button clicked");
+            }
+        });
+
+        buttonPanel.add(appendNewBookButton);
+        buttonPanel.add(deleteBookButton);
+        buttonPanel.add(addBookQuantityButton);
+        buttonPanel.add(subtractBookQuantityButton);
+
+        getContentPane().add(buttonPanel, BorderLayout.CENTER);
     }
 
     @Override
     protected String getRoleDescription() {
         return "You are logged in as an Admin.";
-    }
-
-    private void loadUserList() {
-        // Clear existing user list
-        userListModel.clear();
-
-        // Populate user list from UserDatabase
-        UserDatabase database = UserDatabase.getInstance();
-        for (String[] userData : database.getAllUsersData()) {
-            String username = userData[0];
-            userListModel.addElement(username);
-        }
-    }
-
-    private void deleteUser() {
-        // Get the selected username from the JList
-        String selectedUsername = userList.getSelectedValue();
-        if (selectedUsername != null) {
-            // Confirm deletion
-            int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete user '" + selectedUsername + "'?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
-            if (option == JOptionPane.YES_OPTION) {
-                // Delete user from database
-                UserDatabase database = UserDatabase.getInstance();
-                boolean deleted = database.deleteUser(selectedUsername);
-                if (deleted) {
-                    JOptionPane.showMessageDialog(this, "User '" + selectedUsername + "' deleted successfully.");
-                    loadUserList(); // Refresh the user list
-                } else {
-                    JOptionPane.showMessageDialog(this, "Error deleting user.");
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a user to delete.");
-        }
     }
 }

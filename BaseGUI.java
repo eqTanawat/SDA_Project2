@@ -10,7 +10,7 @@ public abstract class BaseGUI extends JFrame {
         this.user = user;
 
         setTitle(title);
-        setSize(400, 300);
+        setSize(1200, 720);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
