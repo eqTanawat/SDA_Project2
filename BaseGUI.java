@@ -14,23 +14,9 @@ public abstract class BaseGUI extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
+        createMenu(); // Create the menu bar
 
-        JPanel topPanel = new JPanel(new BorderLayout());
-        JButton logoutButton = new JButton("Logout");
-        logoutButton.setPreferredSize(new Dimension(100, 30)); // Set preferred size
-        logoutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                logout();
-            }
-        });
-        topPanel.add(logoutButton, BorderLayout.EAST); // Logout button aligned to the right
-        panel.add(topPanel, BorderLayout.NORTH);
-
-        add(panel);
-        setVisible(true);
+        createGUI(); // Call the template method
     }
 
     // Template method defining the common structure
@@ -44,6 +30,22 @@ public abstract class BaseGUI extends JFrame {
 
     // Abstract method to be overridden by subclasses to provide role-specific description
     protected abstract String getRoleDescription();
+
+    // Create the menu bar with logout menu item
+    private void createMenu() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem logoutMenuItem = new JMenuItem("Logout");
+        logoutMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                logout();
+            }
+        });
+        fileMenu.add(logoutMenuItem);
+        menuBar.add(fileMenu);
+        setJMenuBar(menuBar);
+    }
 
     private void logout() {
         dispose(); // Close the current window
